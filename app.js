@@ -153,7 +153,7 @@ search.addEventListener("input", function () {
 if (annyang) {
   // Let's define our first command. First the text we expect, and then the function it should call
   var commands = {
-    "hello": function () {
+    hello: function () {
       console.log("Hello");
       i = 1;
     },
@@ -169,16 +169,19 @@ if (annyang) {
       note.value = variable;
       i = 3;
     },
-    "add": function () {
+    add: function () {
       console.log("add ho gaya");
       add();
+      i = 4;
     },
-    "clear": function () {
+    clear: function () {
       clear();
+      i = 5;
     },
     "delete *tag": function (variable) {
       console.log("delete ho gaya");
       deleteNote(variable);
+      i = 6;
     },
   };
 
@@ -212,6 +215,21 @@ mainContainer.addEventListener("click", () => {
   }
   if (i == 3) {
     speech.text = "Note Added";
+    window.speechSynthesis.speak(speech);
+    i = 0;
+  }
+  if (i == 4) {
+    speech.text = "Added";
+    window.speechSynthesis.speak(speech);
+    i = 0;
+  }
+  if (i == 5) {
+    speech.text = "Clear";
+    window.speechSynthesis.speak(speech);
+    i = 0;
+  }
+  if (i == 6) {
+    speech.text = "Deleted";
     window.speechSynthesis.speak(speech);
     i = 0;
   }
