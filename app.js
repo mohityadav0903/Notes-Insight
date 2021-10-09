@@ -153,7 +153,7 @@ search.addEventListener("input", function () {
 if (annyang) {
   // Let's define our first command. First the text we expect, and then the function it should call
   var commands = {
-    " hello ": function () {
+    'hello': function () {
       console.log("Hello");
       i = 1;
     },
@@ -169,11 +169,11 @@ if (annyang) {
       note.value = variable;
       i = 3;
     },
-    " add ": function () {
+    'add': function () {
       console.log("add ho gaya");
       add();
     },
-    " clear ": function () {
+    'clear': function () {
       clear();
     },
     "delete *tag": function (variable) {
