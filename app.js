@@ -161,13 +161,13 @@ if (annyang) {
     'hello': function() {
       console.log("Hello");
     },
-    'add title *tag':function(variable) {
+    'title *tag':function(variable) {
       console.log(variable);
       let title=document.getElementById("title");
       title.value=variable;
     
     },
-    'add note *tag':function(variable){
+    'note *tag':function(variable){
       console.log(variable);
       let note=document.getElementById("addTxt");
       note.value=variable;
