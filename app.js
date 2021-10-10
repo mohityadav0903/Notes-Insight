@@ -34,16 +34,15 @@ function add(e) {
     titleObj = [];
   } else {
     titleObj = JSON.parse(titles);
-  
   }
-  if(addTxt.value!=="" &&addTitle.value!==""){
+  if (addTxt.value !== "" && addTitle.value !== "") {
     titleObj.push(addTitle.value);
-    localStorage.setItem("titles", JSON.stringify(titleObj)); 
+    localStorage.setItem("titles", JSON.stringify(titleObj));
   }
   // console.log(
   //   titles
   // );
-  
+
   // for note
   let notes = localStorage.getItem("notes");
   if (notes == null) {
@@ -52,24 +51,22 @@ function add(e) {
     notesObj = JSON.parse(notes);
   }
 
-  if(addTxt.value!=="" &&addTitle.value!==""){
-    
+  if (addTxt.value !== "" && addTitle.value !== "") {
     notesObj.push(addTxt.value);
     localStorage.setItem("notes", JSON.stringify(notesObj));
   }
   // console.log(notes);
-  
+
   // showing of notes
   // showTitles();
-  if(addTxt.value!=="" &&addTitle.value!==""){
-      console.log("chal raha he");
-      showNotes();
-    }
-    else{
-      alert("Please add your title and note");
-    }
-    addTitle.value = "";
-    addTxt.value = "";
+  if (addTxt.value !== "" && addTitle.value !== "") {
+    console.log("chal raha he");
+    showNotes();
+  } else {
+    alert("Please add your title and note");
+  }
+  addTitle.value = "";
+  addTxt.value = "";
 }
 let addBtn = document.getElementById("addBtn");
 addBtn.addEventListener("click", add);
@@ -136,8 +133,8 @@ function deleteNote(ind) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  titleObj.splice(ind,1);
-  localStorage.setItem("titles", JSON.stringify(titleObj)); 
+  titleObj.splice(ind, 1);
+  localStorage.setItem("titles", JSON.stringify(titleObj));
   notesObj.splice(ind, 1);
   localStorage.setItem("notes", JSON.stringify(notesObj));
   showNotes();
@@ -218,18 +215,18 @@ if (annyang) {
       note.value = variable;
       i = 3;
     },
-   "add": function () {
+    add: function () {
       console.log("add ho gaya");
       add();
       i = 4;
     },
-    "ad": function () {
+    ad: function () {
       console.log("add ho gaya");
       add();
       i = 4;
     },
-    
-    "clear": function () {
+
+    clear: function () {
       console.log("clear ho gaya");
       clear();
       i = 5;
@@ -238,6 +235,10 @@ if (annyang) {
       console.log("delete ho gaya");
       deleteNote(variable);
       i = 6;
+    },
+    review: function (variable) {
+      console.log("reviewing...");
+      i = 7;
     },
   };
 
@@ -265,17 +266,17 @@ mainContainer.addEventListener("click", () => {
     i = 0;
   }
   if (i == 2) {
-    let title=document.getElementById("title");
-    let  str=title.value;
-    speech.text = "Title Added "+str;
-    
+    let title = document.getElementById("title");
+    let str = title.value;
+    speech.text = "Title Added " + str;
+
     window.speechSynthesis.speak(speech);
     i = 0;
   }
   if (i == 3) {
-    let title=document.getElementById("addTxt");
-    let  str=title.value;
-    speech.text = "Note Added "+str;
+    let title = document.getElementById("addTxt");
+    let str = title.value;
+    speech.text = "Note Added " + str;
     window.speechSynthesis.speak(speech);
     i = 0;
   }
@@ -291,6 +292,13 @@ mainContainer.addEventListener("click", () => {
   }
   if (i == 6) {
     speech.text = "Deleted";
+    window.speechSynthesis.speak(speech);
+    i = 0;
+  }
+  if (i == 7) {
+    let title = localStorage.getItem("titles");
+    let notes = localStorage.getItem("notes");
+    speech.text = `Title is ${title} and Note is ${notes}`;
     window.speechSynthesis.speak(speech);
     i = 0;
   }
