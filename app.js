@@ -1,6 +1,5 @@
 // console.log("hello");
 showNotes();
-
 // Automatic heading written
 const heading = document.getElementById("heading");
 const str = "Welcome to Note-Insight";
@@ -35,6 +34,7 @@ function add(e) {
     titleObj = [];
   } else {
     titleObj = JSON.parse(titles);
+  
   }
   if(addTxt.value!=="" &&addTitle.value!==""){
     titleObj.push(addTitle.value);
@@ -124,12 +124,20 @@ function showNotes() {
 
 // function to delete a notes
 function deleteNote(ind) {
+  let titles = localStorage.getItem("titles");
+  if (titles == null) {
+    titleObj = [];
+  } else {
+    titleObj = JSON.parse(titles);
+  }
   let notes = localStorage.getItem("notes");
   if (notes == null) {
     notesObj = [];
   } else {
     notesObj = JSON.parse(notes);
   }
+  titleObj.splice(ind,1);
+  localStorage.setItem("titles", JSON.stringify(titleObj)); 
   notesObj.splice(ind, 1);
   localStorage.setItem("notes", JSON.stringify(notesObj));
   showNotes();
@@ -210,18 +218,19 @@ if (annyang) {
       note.value = variable;
       i = 3;
     },
-    add: function () {
+   "add": function () {
       console.log("add ho gaya");
       add();
       i = 4;
     },
-    ad: function () {
+    "ad": function () {
       console.log("add ho gaya");
       add();
       i = 4;
     },
     
-    clear: function () {
+    "clear": function () {
+      console.log("clear ho gaya");
       clear();
       i = 5;
     },
@@ -245,9 +254,9 @@ let mainContainer = document.getElementsByTagName("body")[0];
 mainContainer.addEventListener("click", () => {
   let speech = new SpeechSynthesisUtterance();
   speech.lang = "en-US";
-  speech.text = "Welcome to Notes Insight";
+  speech.text = "Welcome to Notes Insight please click anywhere to continue.";
   speech.volume = 1;
-  speech.rate = 1;
+  speech.rate = 0.8;
   speech.pitch = 1;
 
   if (i == 1) {
@@ -256,12 +265,17 @@ mainContainer.addEventListener("click", () => {
     i = 0;
   }
   if (i == 2) {
-    speech.text = "Title Added";
+    let title=document.getElementById("title");
+    let  str=title.value;
+    speech.text = "Title Added "+str;
+    
     window.speechSynthesis.speak(speech);
     i = 0;
   }
   if (i == 3) {
-    speech.text = "Note Added";
+    let title=document.getElementById("addTxt");
+    let  str=title.value;
+    speech.text = "Note Added "+str;
     window.speechSynthesis.speak(speech);
     i = 0;
   }
