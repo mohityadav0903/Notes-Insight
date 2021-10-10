@@ -36,13 +36,14 @@ function add(e) {
   } else {
     titleObj = JSON.parse(titles);
   }
-  titleObj.push(addTitle.value);
-  localStorage.setItem("titles", JSON.stringify(titleObj));
+  if(addTxt.value!=="" &&addTitle.value!==""){
+    titleObj.push(addTitle.value);
+    localStorage.setItem("titles", JSON.stringify(titleObj)); 
+  }
   // console.log(
   //   titles
   // );
-  addTitle.value = "";
-
+  
   // for note
   let notes = localStorage.getItem("notes");
   if (notes == null) {
@@ -50,17 +51,27 @@ function add(e) {
   } else {
     notesObj = JSON.parse(notes);
   }
-  notesObj.push(addTxt.value);
-  localStorage.setItem("notes", JSON.stringify(notesObj));
-  addTxt.value = "";
-  // console.log(notes);
 
+  if(addTxt.value!=="" &&addTitle.value!==""){
+    
+    notesObj.push(addTxt.value);
+    localStorage.setItem("notes", JSON.stringify(notesObj));
+  }
+  // console.log(notes);
+  
   // showing of notes
   // showTitles();
-  showNotes();
+  if(addTxt.value!=="" &&addTitle.value!==""){
+      console.log("chal raha he");
+      showNotes();
+    }
+    else{
+      alert("Please add your title and note");
+    }
+    addTitle.value = "";
+    addTxt.value = "";
 }
 let addBtn = document.getElementById("addBtn");
-6;
 addBtn.addEventListener("click", add);
 
 // // function to show titles from localStorage
@@ -163,7 +174,37 @@ if (annyang) {
       title.value = variable;
       i = 2;
     },
+    "ad title *tag": function (variable) {
+      console.log(variable);
+      let title = document.getElementById("title");
+      title.value = variable;
+      i = 2;
+    },
+    "add a title *tag": function (variable) {
+      console.log(variable);
+      let title = document.getElementById("title");
+      title.value = variable;
+      i = 2;
+    },
+    "a title *tag": function (variable) {
+      console.log(variable);
+      let title = document.getElementById("title");
+      title.value = variable;
+      i = 2;
+    },
     "add note *tag": function (variable) {
+      console.log(variable);
+      let note = document.getElementById("addTxt");
+      note.value = variable;
+      i = 3;
+    },
+    "ad note *tag": function (variable) {
+      console.log(variable);
+      let note = document.getElementById("addTxt");
+      note.value = variable;
+      i = 3;
+    },
+    "a note *tag": function (variable) {
       console.log(variable);
       let note = document.getElementById("addTxt");
       note.value = variable;
@@ -174,6 +215,12 @@ if (annyang) {
       add();
       i = 4;
     },
+    ad: function () {
+      console.log("add ho gaya");
+      add();
+      i = 4;
+    },
+    
     clear: function () {
       clear();
       i = 5;
@@ -194,7 +241,7 @@ if (annyang) {
 
 // text to speech
 let i = 1;
-let mainContainer = document.getElementById("main-container");
+let mainContainer = document.getElementsByTagName("body")[0];
 mainContainer.addEventListener("click", () => {
   let speech = new SpeechSynthesisUtterance();
   speech.lang = "en-US";
