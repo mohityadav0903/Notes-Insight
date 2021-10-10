@@ -20,5 +20,6 @@ Command | Usage
 |Add| To Add the Note
 |Delete| To delete the note
 |Clear| To clear all the notes
+|Review| To dicate out all the notes made
 
 #### Due to Chrome Policies, you are needed to click anywhere on the screen to enable voice after saying your command to hear the audio. To know more click [here](https://developer.chrome.com/blog/autoplay/)
